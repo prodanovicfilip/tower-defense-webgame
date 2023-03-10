@@ -1,5 +1,5 @@
 class Enemy extends Sprite {
-  constructor({ position = { x: 0, y: 0 } }) {
+  constructor({ position = { x: 0, y: 0 }, health = 100 }) {
     super({
       position,
       imageSrc: "img/cactus.png",
@@ -16,7 +16,7 @@ class Enemy extends Sprite {
       y: this.position.y + this.height / 2,
     };
     this.radius = 50;
-    this.health = 100;
+    this.health = health;
     this.velocity = {
       x: 0,
       y: 0,

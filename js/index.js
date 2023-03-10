@@ -38,6 +38,7 @@ image.onload = () => {
 image.src = "img/gameMap.png";
 
 const enemies = [];
+let hp = 100;
 
 function spawnEnemies(spawnCount) {
   for (let i = 1; i < spawnCount + 1; i++) {
@@ -45,6 +46,7 @@ function spawnEnemies(spawnCount) {
     enemies.push(
       new Enemy({
         position: { x: waypoints[0].x - xOffset, y: waypoints[0].y },
+        health: hp + i * 2,
       })
     );
   }
@@ -109,21 +111,22 @@ function animate() {
         document.querySelector("#healed").style.display = "flex";
         document.querySelector("#healed").innerHTML =
           "Heals used: " + healsUsed;
-      }
-      enemyCount += 3;
-      wave++;
-      spawnEnemies(enemyCount);
-      enemies.forEach((enemy) => {
-        enemy.speed = enemyspeed;
-      });
-      if (enemyspeed < 12 && check % 2 === 0) {
-        enemyspeed++;
-        check++;
       } else {
-        check++;
-      }
-      if (wave < 16)
+        enemyCount += 3;
+        wave++;
+
+        spawnEnemies(enemyCount);
+        enemies.forEach((enemy) => {
+          enemy.speed = enemyspeed;
+        });
+        if (enemyspeed < 12 && check % 2 === 0) {
+          enemyspeed++;
+          check++;
+        } else {
+          check++;
+        }
         document.querySelector("#waveid").innerHTML = "Wave: " + wave + "/15";
+      }
     }
 
     placementTiles.forEach((tile) => {
@@ -323,7 +326,8 @@ function speedMe() {
       document.querySelector("#speed-cost").innerHTML = "";
       document.querySelector("#menu-speed").innerHTML = "MAX";
     } else
-      document.querySelector("#menu-speed").innerHTML = "LvL: " + (curPower - 4);
+      document.querySelector("#menu-speed").innerHTML =
+        "LvL: " + (curPower - 4);
   }
   if (curPower < 14 && coins >= 50) {
     curPower += 1;
