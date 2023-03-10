@@ -320,9 +320,10 @@ function speedMe() {
     curPower += 1;
     reduceCoins(500);
     if (curPower === 19) {
+      document.querySelector("#speed-cost").innerHTML = "";
       document.querySelector("#menu-speed").innerHTML = "MAX";
-    }
-    document.querySelector("#menu-speed").innerHTML = "LvL: " + (curPower - 4);
+    } else
+      document.querySelector("#menu-speed").innerHTML = "LvL: " + (curPower - 4);
   }
   if (curPower < 14 && coins >= 50) {
     curPower += 1;
